@@ -1,0 +1,19 @@
+<app-todo-form />
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Ação</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of todos | async">
+      <td>{{ item.name }}</td>
+      <td>
+        <button (click)="editarItem(item)">Editar</button>
+        <button (click)="deletarItem(item)">Deletar</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
