@@ -1,3 +1,10 @@
-<input type="text" [(ngModel)]="name" placeholder="Digite o nome " />
+<app-custom-input
+  label="Nome"
+  placeholder="Digite seu nome"
+  [(value)]="name"
+  [clear]="clear"
+></app-custom-input>
 
-<button (click)="adicionarItem()">Adicionar</button>
+<app-custom-button class="sucess" (click)="adicionarItem()">
+  Adicionar
+</app-custom-button>

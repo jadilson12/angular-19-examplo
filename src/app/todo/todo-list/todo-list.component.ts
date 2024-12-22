@@ -1,18 +1,21 @@
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
+import { tap } from 'rxjs';
 import { Todo } from '../../api/data';
+import { ButtomComponent } from '../../buttom/buttom.component';
+import { ToastService } from '../../toast/toast.service';
 import { TodoFormComponent } from '../todo-form/todo-form.component';
 import { TodoService } from '../todo.service';
 
 @Component({
   selector: 'app-todo-list',
-  imports: [CommonModule, AsyncPipe, TodoFormComponent],
-  providers: [],
+  imports: [ButtomComponent, CommonModule, AsyncPipe, TodoFormComponent],
   templateUrl: './todo-list.component.html',
   styleUrl: './todo-list.component.scss',
 })
 export class TodoListComponent {
   private _todoService = inject(TodoService);
+  private _toastService = inject(ToastService);
 
   todos = this._todoService.getTodos();
 
@@ -27,7 +30,15 @@ export class TodoListComponent {
     });
   }
 
-  deletarItem(id: string) {
-    this._todoService.deleteTodos(id);
+  deletarItem(item: Todo) {
+    this._todoService.deleteTodos(item.id).pipe(
+      tap(() => {
+        this._toastService.showToast(
+          'Item deletado com sucesso',
+          'success',
+          3000
+        );
+      })
+    );
   }
 }

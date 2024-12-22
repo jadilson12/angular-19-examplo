@@ -1,0 +1,11 @@
+<label [for]="inputId()" class="custom-label">
+  {{ label() }}
+  <input
+    [id]="inputId()"
+    class="custom-input"
+    [type]="type()"
+    [placeholder]="placeholder()"
+    [(ngModel)]="value"
+    [clear]="clear()"
+  />
+</label>

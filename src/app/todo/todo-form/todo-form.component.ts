@@ -1,25 +1,29 @@
-import { Component, inject, model } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Component, inject } from '@angular/core';
+import { ButtomComponent } from '../../buttom/buttom.component';
+import { InputComponent } from '../../input/input.component';
 import { ToastService } from '../../toast/toast.service';
 import { TodoService } from '../todo.service';
 
 @Component({
   selector: 'app-todo-form',
-  imports: [FormsModule],
+  imports: [ButtomComponent, InputComponent],
   templateUrl: './todo-form.component.html',
   styleUrl: './todo-form.component.scss',
 })
 export class TodoFormComponent {
   private _totoService = inject(TodoService);
   private _toastService = inject(ToastService);
-  name = model('');
+  name = '';
+  clear = false;
 
   adicionarItem() {
     this._totoService.addTodos({
       id: '',
-      name: this.name(),
+      name: this.name,
     });
-    this.name.set('');
+
+    this.clear = true;
+
     this._toastService.showToast(
       'Item adicionado com sucesso',
       'success',

@@ -11,8 +11,12 @@
     <tr *ngFor="let item of todos | async">
       <td>{{ item.name }}</td>
       <td>
-        <button (click)="editarItem(item)">Editar</button>
-        <button (click)="deletarItem(item)">Deletar</button>
+        <app-custom-button class="primary" (click)="editarItem(item)">
+          Editar
+        </app-custom-button>
+        <app-custom-button class="danger" (click)="deletarItem(item)">
+          Deletar
+        </app-custom-button>
       </td>
     </tr>
   </tbody>
